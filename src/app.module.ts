@@ -7,7 +7,7 @@ import { ModeratorModule } from './Moderator/moderator.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 @Module({
   //import individual module here. Do not override this 
-
+  //Don't delete this
   imports: [SellerModule, ModeratorModule, TypeOrmModule.forRoot({
     type:'postgres',
     host: 'localhost',
