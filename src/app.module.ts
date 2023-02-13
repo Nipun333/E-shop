@@ -1,14 +1,12 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
-import { SellerModule } from './Seller/seller.module';
-import { ModeratorModule } from './Moderator/moderator.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { AdminModule } from './admin/adminmodule.module';
 @Module({
+
   //import individual module here. Do not override this 
   //Don't delete this
-  imports: [SellerModule, ModeratorModule, TypeOrmModule.forRoot({
+  imports: [AdminModule, SellerModule, ModeratorModule, TypeOrmModule.forRoot({
     type:'postgres',
     host: 'localhost',
     port:5432,
@@ -20,7 +18,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   })],
   
   //import modules here
-  imports: [SellerModule, ModeratorModule],
   controllers: [AppController],
   providers: [AppService],
 })
