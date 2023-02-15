@@ -78,5 +78,7 @@ export class ModeratorService {
             return this.moderatorRepo.save(moderatorObject);
     }
 
+    //Work on natural api
+
 
 }
