@@ -72,7 +72,7 @@ export class ModeratorService {
 
         var ext =  this.moderatorRepo.findOneBy({ Username: moderatorObject.Username});
         if(ext){
-            return "Username already exists";
+            return "Username already exists, Change username!";
         }
         else
             return this.moderatorRepo.save(moderatorObject);
