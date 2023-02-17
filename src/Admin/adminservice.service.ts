@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Adminlogin, Productinfo, sellerinfo } from "./adminlogin.dto";
-import { Categoryinfo } from "./categoryinfo.dto";
+// import { Categoryinfo } from "./categoryinfo.dto";
 
 @Injectable()
 export class AdminService {
@@ -14,10 +14,10 @@ getcategory(qry):any {
     return "the id is "+qry.id +" and name is "+qry.cname+"status is"+qry.status;
 }
 
-insertcategory(mydto:Categoryinfo):any {
+// insertcategory(mydto:Categoryinfo):any {
     
-    return "category id: "  + mydto.id+" and name is " + mydto.cname+"status is"+mydto.status;
-}
+//     return "category id: "  + mydto.id+" and name is " + mydto.cname+"status is"+mydto.status;
+// }
 updatecategory(id,cname,status):any {
     return "category updated id: " +id+" and name is " +cname+"status is"+status;
 }

@@ -21,11 +21,11 @@ export class AdminController{
     return "Admin name is"+ qry.name;
     }
     
-    @Post("/cinfo")
-    @UsePipes(new ValidationPipe())
-    insertcategory(@Body() mydto1:Categoryinfo): any {
-      return this.adminService.insertcategory(mydto1);
-    }
+    // @Post("/cinfo")
+    // @UsePipes(new ValidationPipe())
+    // insertcategory(@Body() mydto1:Categoryinfo): any {
+    //   return this.adminService.insertcategory(mydto1);
+    // }
 
     @Put("/updatecategory/")
     updatecategory( 
