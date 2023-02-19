@@ -5,6 +5,7 @@ import { AdminModule } from './admin/adminmodule.module';
 import { SellerModule } from './Seller/seller.module';
 import { ModeratorModule } from './Moderator/moderator.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ReportModule } from './Report/report.module';
 
 
 @Module({

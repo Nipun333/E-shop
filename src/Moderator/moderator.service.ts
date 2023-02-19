@@ -84,7 +84,7 @@ export class ModeratorService {
         moderatorObject.Phone = moderatorDTO.Phone;
         moderatorObject.Username = moderatorDTO.Username;
         moderatorObject.Password = moderatorDTO.Password;
-        moderatorObject.Blocked = moderatorDTO.Blocked;
+        moderatorObject.Blocked = false;
     
         const existingModerator = await this.moderatorRepo.findOneBy({ Username: moderatorObject.Username });
     
@@ -102,6 +102,19 @@ export class ModeratorService {
     deleteModeratorById(id): any{
         return this.moderatorRepo.delete(id);
     }
+
+
+    async blockModeratorById(id): Promise<any>{
+
+        var ext = this.moderatorRepo.findOneBy({ Id:id });
+        if(ext){
+            (await ext).Blocked = true;
+            return this.moderatorRepo.update(id, await ext);
+        }
+        else
+            return "No matches found for this ID in database!"; 
+    }
+
 
     // getIndex():any { 
     //     return "Hello World";

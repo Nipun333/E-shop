@@ -1,4 +1,4 @@
-import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Post, Put, Query, UsePipes, ValidationPipe } from "@nestjs/common";
+import { Body, Controller, DefaultValuePipe, Delete, Get, Param, ParseBoolPipe, ParseIntPipe, Patch, Post, Put, Query, UsePipes, ValidationPipe } from "@nestjs/common";
 import { ModeratorService } from "./moderator.service";
 import { ModeratorDTO } from "./DTOs/moderator.dto";
 import { EditModeratorDTO } from "./DTOs/editModerator.dto";
@@ -61,6 +61,11 @@ export class ModeratorController {
     @Delete('delete/:id')
     deleteModeratorById(@Param('id', ParseIntPipe) id: number): any {
         return this.moderatorService.deleteModeratorById(id);
+    }
+
+    @Patch('block/:id')
+    blockModerator(@Param('id', ParseIntPipe) id: number): any{
+        return this.moderatorService.blockModeratorById(id);
     }
 
 
