@@ -1,7 +1,7 @@
 import{Length,IsInt,validate, Contains, MinLength, MaxLength, IsDate, IsEmail} from 'class-validator';
 export class Adminlogin {
        
-    @Length(5,10,{message:'name is not valid'})
+    @Length(5,10,{message:'name is not between 5 to 10'})
     name: string;
     password:string;
 
@@ -9,10 +9,10 @@ export class Adminlogin {
 
 }
 export class Categoryinfo {   
-    @IsInt({message:'id must be an enteger'})
-    id:number;
+   // @IsInt({message:'id must be an integer'})
+    //id:number;
     
-  @Contains('food',{message:'category name does nor match',})
+  //@Contains('food',{message:'category name does nor match',})
     cname:string;
     status:string;
 
@@ -30,13 +30,13 @@ export class Productinfo {
 
 }
 export class sellerinfo {   
-    
-    id:number;
+   // @Length(2,5)
+    //id:number;
     sname:string;
     @IsEmail()
     email:string;
     phn:number;
-    address:string;
+    //address:string;
 
 }
 

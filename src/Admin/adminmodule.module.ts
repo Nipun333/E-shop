@@ -1,10 +1,15 @@
 import { Module } from '@nestjs/common';
-import { AdminController } from './admin.controller';
-import { AdminService } from './adminservice.service';
+import { AdminController,sellerController } from './admin.controller';
+import { AdminService,sellerService } from './adminservice.service';
+import { TypeOrmModule } from "@nestjs/typeorm";
 //import { AdminModule } from './admin/adminmodule.module';
+import { CategoryEntity } from "./adminentity.entity";
+import { SellerEntity } from "./sellerentity.entity"
+
 @Module({
   //imports: [AdminModule],
-  controllers: [AdminController],
-  providers: [AdminService],
+  imports: [TypeOrmModule.forFeature([CategoryEntity,SellerEntity])],
+  controllers: [AdminController,sellerController],
+  providers: [AdminService,sellerService],
 })
 export class AdminModule {}
