@@ -1,69 +1,83 @@
-import { Body, Controller, Get, Param, Post, Put, Delete, Query } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Put, Delete, Query, UsePipes, ValidationPipe, ParseIntPipe, Patch } from "@nestjs/common";
+import { Seller } from "./seller.dto";
+import { SellerService } from "./seller.service";
 
 
 @Controller("/Seller")
 
 export class SellerController {
 
+constructor(private sellerService: SellerService){}
+
 @Get("/dashboard")
  getSeller(): string {
-  return "Seller's Profile: ";
+  return this.sellerService.getSeller();
  }
 
 @Get("/sellerhistory")
 Sellerhistory(): string {
-    return "Seller's Statistics: ";
+    return this.sellerService.Sellerhistory();
+}
+
+@Get("/findbyname")
+findSellerByname(@Query() qry: any): any {
+    return this.sellerService.findSellerByname(qry);
 }
 
 @Get("/findall")
-findAll(@Query() qry: any): any {
-    return "Searched result shown: "+ qry.name;
+findAll(): any {
+   return this.sellerService.findAll();
 }
 
-@Get("/findseller/:id")
-findSellerById (@Param() params): any {
-    return "Seller Id is: "+ params.id;
-}
-
-
-@Post("/register/:name/:id")
-register(@Param() params): any {
-    return "Seller name: "+ params.name + " & Id: " + params.id;
+@Post("/registration")
+@UsePipes(new ValidationPipe())
+register(@Body() mydto:Seller): any {
+    return this.sellerService.register(mydto);
 }
 
 @Post("/login")
-login(@Body() body): any {
-   return "Successfully logged in...\nSeller name "+ body.name + " & Id: " + body.id;
+@UsePipes(new ValidationPipe())
+login(@Body("name") name:string,
+      @Body('password') password:string ): any {
+   return this.sellerService.login(name,password);
 }
 
-@Post("/insertproduct")
+/*@Post("/insertproduct")
+
 productAdd(@Body("name") name: string, @Body("id") id: number): any {
-    return  "Product name: "+ name + " & id: " + id ;
+    return this.sellerService.productAdd(name,id);
+}*/
+
+@Put("/updateProfile/")
+updateProfile(@Body("id",ParseIntPipe) id:number,
+@Body("name") name:string,
+@Body("email") email:string,
+@Body("password") password:string,
+@Body("address") address:string,): any {
+    return this.sellerService.updateProfile(id,name,email,password,address);
 }
 
-@Put("/updateProfile/:name/:id")
-updateProfile(@Param() params): any {
-    return "Seller name: "+ params.name + " & Id: " +params.id;
-}
+/*@Put("/updateProduct/:name/:id")
 
-@Put("/updateProduct/:name/:id")
 updateProduct(@Param('name') productName: string, @Param('id') productId:number): any {
-    return "Seller name: "+ productName + " & Id: " + productId;
+    return this.sellerService.updateProduct(productName,productId);
+}*/
+
+@Patch("/updateAddress/:id")
+updateAddress(@Param("id",ParseIntPipe) id: number, @Body() mydto:Seller): string {
+   return this.sellerService.updateOne(id,mydto);
 }
 
-@Put("/updateAddress/:address")
-updateAddress(@Param() params): string {
-    return "Seller updated address: "+ params.address;
+@Delete ("/deleteUser/:id")
+deleteUser(@Param("id", ParseIntPipe) Uid:number): any {
+    return this.sellerService.deleteUser(Uid);
 }
 
-@Delete ("/deleteUser/:name/:id")
-deleteUser(@Param() params): string {
-    return "Seller deleted name: " + params.name + " & id: "+ params.id +" \nSuccessfully deleted...";
-}
+/*@Delete ("/deleteProduct/:id")
+deleteProduct(@Param('id') Pid: number): any {
+    return this.sellerService.deleteProduct(Pid);
+}*/
 
-@Delete ("/deleteProduct/:name/:id")
-deleteProduct(@Param('name') productName: string, @Param('id') productId:number): any {
-    return "Seller deleted name: " + productName + " & id: " + productId + " \nSuccessfully deleted...";
-}
+
 
 }
